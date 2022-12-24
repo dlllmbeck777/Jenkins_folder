@@ -1,0 +1,11 @@
+pipeline {
+    agent {
+        label 'docker-agent'
+    }
+    stage('Build Docker Image Promotheus') {  
+        steps{                     
+            sh 'docker compose up -d'     
+            echo 'Docker-compose-build Build Image Completed'                
+            }           
+        }
+}

@@ -1,0 +1,39 @@
+services:
+  jenkins:
+    container_name: jenkins
+    restart: unless-stopped
+    image: mirekphd/jenkins-jdk17-on-ubuntu2204:latest
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    user: root
+    networks:
+      - default
+
+  nexus:
+    container_name: nexus
+    restart: unless-stopped
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+      - "8083:8083"
+    volumes:
+      - nexus_data:/nexus-data
+    networks:
+      - default
+
+volumes:
+  jenkins_home:
+    external: true
+    name: jenkins_home
+  nexus_data:
+    external: true
+    name: nexus_data
+
+networks:
+  default:
+    driver: bridge
