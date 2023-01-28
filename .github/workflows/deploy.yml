@@ -21,4 +21,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           envs: GTOKEN
           script:  |
-            echo "Hello world!"
+            cd ~/test_deploy
+            echo "Hello world!" > test_deploy
+            date > test_deploy
