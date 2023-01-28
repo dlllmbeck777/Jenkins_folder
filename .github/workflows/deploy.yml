@@ -1,4 +1,4 @@
-name: Auth_Service_Actions_DEV
+name: test_deploy
 
 on: 
   push:
@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS dev with SSH ACTION
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@master
         env:
           GTOKEN: ${{ secrets.SSH_TOKEN_WEB_AZAMAT }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASS_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           envs: GTOKEN
           script:  |
